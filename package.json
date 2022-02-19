@@ -2,10 +2,10 @@
   "name": "@fsdk/tree-utils",
   "version": "0.0.1",
   "description": "Utilities for tree-like structures",
-  "main": "index.js",
-  "type": "module",
+  "main": "dist/index.js",
   "scripts": {
-    "test": "jest"
+    "build": "tsc",
+    "test": "echo \"no tests defined\" && exit 0"
   },
   "repository": {
     "type": "git",
@@ -21,5 +21,8 @@
     "url": "https://github.com/dkashinsky/tree-utils/issues"
   },
   "homepage": "https://github.com/dkashinsky/tree-utils#readme",
-  "devDependencies": {}
+  "devDependencies": {
+    "@types/node": "^14.18.12",
+    "typescript": "^4.5.5"
+  }
 }
