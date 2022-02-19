@@ -1,0 +1,25 @@
+{
+  "name": "@fsdk/tree-utils",
+  "version": "0.0.1",
+  "description": "Utilities for tree-like structures",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/dkashinsky/tree-utils.git"
+  },
+  "keywords": [
+    "tree",
+    "utilities"
+  ],
+  "author": "Dmitry Kashinsky",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/dkashinsky/tree-utils/issues"
+  },
+  "homepage": "https://github.com/dkashinsky/tree-utils#readme",
+  "devDependencies": {}
+}
