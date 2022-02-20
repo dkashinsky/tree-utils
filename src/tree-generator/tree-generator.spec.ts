@@ -1,4 +1,4 @@
-import { treeGenerator } from './tree-generator';
+import { treeGenerator, generateTree } from './tree-generator';
 import { defaultItemCreatorFactory, TreeItem } from './tree-item';
 import { TreeItemCreator } from './types';
 
@@ -48,5 +48,20 @@ describe('treeGenerator', () => {
 
     expect(generator.next().value).toBeDefined();
     expect(generator.next().done).toBe(true);
+  });
+});
+
+describe('generateTree', () => {
+  it('returns array of `maxItems` elements even if generator is expected to generate more', () => {
+    const maxItems = 10;
+    const treeItems = generateTree({
+      itemCreator: defaultItemCreatorFactory(),
+      maxDepth: 15,
+      minSiblings: 5,
+      maxSiblings: 15,
+      maxItems,
+    });
+
+    expect(treeItems.length).toBe(maxItems);
   });
 });
