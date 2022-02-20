@@ -40,11 +40,13 @@ export const defaults: TreeOptions = {
   maxSiblings: 7,
 };
 
-export function generateTree<T>(
-  options: Partial<TreeOptions> & TreeItemOptions<T>,
-  maxItems: number = 1000,
-): T[] {
-  const generator = treeGenerator({ ...defaults, ...options });
+export type GenerateTreeOptions<T> = Partial<TreeOptions> & TreeItemOptions<T> & {
+  maxItems?: number;
+};
+
+export function generateTree<T>(options: GenerateTreeOptions<T>): T[] {
+  const { maxItems = 1000, ...userProvided } = options;
+  const generator = treeGenerator({ ...defaults, ...userProvided });
   const result: T[] = [];
 
   let current = generator.next();
