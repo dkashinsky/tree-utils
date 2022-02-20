@@ -34,7 +34,7 @@ export function* treeGenerator<T>(
   }
 }
 
-export const defaults: TreeOptions = {
+const defaults: TreeOptions = {
   maxDepth: 10,
   minSiblings: 3,
   maxSiblings: 7,
