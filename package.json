@@ -5,6 +5,9 @@
   "description": "Utilities for tree-like structures",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build": "rimraf ./dist && tsc",
     "test": "jest"
