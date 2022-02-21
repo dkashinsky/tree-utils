@@ -12,19 +12,42 @@ Thare are 2 tree generation utility functions here:
 
 Usage Example:
 
-For demo purposes custom implementation is provided for `itemCreator` function but if your usage is limited to tests there is handy `defaultItemCreatorFactory` which creates default item creator which is basically the same as a custom one:
+`itemCreator` - Both `generateTree` and `treeGenerator` rely on creator function used to generate particular tree item.
 ```ts
 import { defaultItemCreatorFactory, TreeItemMeta } from '@fsdk/tree-utils';
 import { nanoid } from 'nanoid'
 
-const itemCreator = (parent: YourTreeItemDataType | undefined, meta: TreeItemMeta) => ({
+type FlatTreeItem = {
+  id: string;
+  parentId?: string;
+  name: string;
+  depth: number;
+}
+
+const flatItemCreator = (parent: FlatTreeItem | undefined, meta: TreeItemMeta) => ({
   id: nanoid(),
   parentId: parent?.id,
   name: `Item ${id}`,
   depth: meta.level,
 });
 
-// alternatively you can use built in item creator
+type NestedTreeItem = {
+  id: string;
+  children: NestedTreeItem[];
+}
+
+const nestedItemCreator = (parent: NestedTreeItem | undefined, meta: TreeItemMeta) => {
+  const item: NestedTreeItem = {
+    id: nanoid(),
+    children: [],
+  };
+
+  parent?.children.push(item);
+
+  return item;
+};
+
+// alternatively you can use built-in item creator factory to produce `flatItemCreator` above
 const itemCreator = defaultItemCreatorFactory();
 ```
 
@@ -39,6 +62,11 @@ const treeItems = generateTree({
   maxSiblings: 15, // Optional. Provides maximum nested items count used by randomizer. Defaults to 7
   maxItems: 1000,  // Optional. Limits total items generated in case generation exceeds specified distribution. Defaults to 1000
 });
+
+// if you use nested tree object structure it is handy to get `root` as all other items are accessible via children property
+const [root] = generateTree({
+  itemCreator: nestedItemCreator,
+});
 ```
 
 `treeGenerator`:
@@ -52,6 +80,6 @@ const generator = treeGenerator({
   maxSiblings: 7, // Required. Provides maximum nested items count used by randomizer.
 });
 
-// Start generation by calling `next`
+// Start generate items by calling `next`
 const treeItem = generator.next().value;
 ```
