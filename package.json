@@ -1,6 +1,5 @@
 {
   "name": "@fsdk/tree-utils",
-  "private": true,
   "version": "0.0.1",
   "description": "Utilities for tree-like structures",
   "main": "dist/index.js",
